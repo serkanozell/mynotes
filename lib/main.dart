@@ -13,12 +13,13 @@ void main() {
     MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.red,
+        primarySwatch: Colors.orange,
       ),
       home: const HomePage(),
       routes: {
         '/login/': (context) => const LoginView(),
-        '/register/': ((context) => const RegisterView())
+        '/register/': ((context) => const RegisterView()),
+        '/notes/': (context) => const NotesView(),
       },
     ),
   );
