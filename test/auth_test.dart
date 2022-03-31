@@ -10,14 +10,14 @@ void main() {
       expect(provider.isInitialized, false);
     });
 
-    test('Connot log out if not initialized', () {
+    test('Cannot log out if not initialized', () {
       expect(
         provider.logOut(),
         throwsA(const TypeMatcher<NotInitializedException>()),
       );
     });
 
-    test('Should be able to initialized', () async {
+    test('Should be able to be initialized', () async {
       await provider.initialize();
       expect(provider.isInitialized, true);
     });
@@ -34,19 +34,21 @@ void main() {
       },
       timeout: const Timeout(Duration(seconds: 2)),
     );
+
     test('Create user should delegate to logIn function', () async {
       final badEmailUser = provider.createUser(
         email: 'foo@bar.com',
         password: 'anypassword',
       );
+
       expect(badEmailUser,
           throwsA(const TypeMatcher<UserNotFoundAuthException>()));
 
       final badPasswordUser = provider.createUser(
-        email: 'someona@bar.com',
+        email: 'someone@bar.com',
         password: 'foobar',
       );
-      expect(badEmailUser,
+      expect(badPasswordUser,
           throwsA(const TypeMatcher<WrongPasswordAuthException>()));
 
       final user = await provider.createUser(
@@ -133,6 +135,5 @@ class MockAuthProvider implements AuthProvider {
     if (user == null) throw UserNotFoundAuthException();
     const newUser = AuthUser(isEmailVerified: true);
     _user = newUser;
-    throw UnimplementedError();
   }
 }
